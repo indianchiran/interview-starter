@@ -1,1 +1,180 @@
-<p>users works!</p>
+<mat-toolbar color="primary"> User Management </mat-toolbar>
+<div class="basic-container">
+  <div class="mat-elevation-z8">
+    <form [formGroup]="userForm" autocomplete="off">
+      <ng-container formArrayName="UserRows">
+        <table
+          #table
+          mat-table
+          [dataSource]="dataSource"
+          class="mat-elevation-z8"
+        >
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>No.</th>
+            <td
+              mat-cell
+              *matCellDef="let element; let i = index"
+              [formGroup]="element"
+            >
+              <mat-form-field>
+                <input
+                  matInput
+                  type="text"
+                  formControlName="id"
+                  [readonly]="true"
+                />
+              </mat-form-field></td
+          ></ng-container>
+
+          <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef>First Name</th>
+            <td
+              mat-cell
+              *matCellDef="let element; let i = index"
+              [formGroup]="element"
+            >
+              <mat-form-field style="width: 100px">
+                <input matInput type="text" formControlName="firstName" />
+              </mat-form-field>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef>Last Name</th>
+            <td
+              mat-cell
+              *matCellDef="let element; let i = index"
+              [formGroup]="element"
+            >
+              <mat-form-field style="width: 100px">
+                <input matInput type="text" formControlName="lastName" />
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="maidenName">
+            <th mat-header-cell *matHeaderCellDef>Maiden Name</th>
+            <td
+              mat-cell
+              *matCellDef="let element; let i = index"
+              [formGroup]="element"
+            >
+              <mat-form-field style="width: 100px">
+                <input matInput type="text" formControlName="maidenName" />
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="age">
+            <th mat-header-cell *matHeaderCellDef>Age</th>
+            <td
+              mat-cell
+              *matCellDef="let element; let i = index"
+              [formGroup]="element"
+            >
+              <mat-form-field style="width: 50px">
+                <input matInput type="text" formControlName="age" />
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="gender">
+            <th mat-header-cell *matHeaderCellDef>Gender</th>
+            <td
+              mat-cell
+              *matCellDef="let element; let i = index"
+              [formGroup]="element"
+            >
+              <mat-form-field style="width: 70px">
+                <input matInput type="text" formControlName="gender" />
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td
+              mat-cell
+              *matCellDef="let element; let i = index"
+              [formGroup]="element"
+            >
+              <mat-form-field style="width: 150px">
+                <input matInput type="text" formControlName="email" />
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef>Phone</th>
+            <td
+              mat-cell
+              *matCellDef="let element; let i = index"
+              [formGroup]="element"
+            >
+              <mat-form-field style="width: 150px">
+                <input matInput type="text" formControlName="phone" />
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="birthDate">
+            <th mat-header-cell *matHeaderCellDef>Birth Date</th>
+            <td
+              mat-cell
+              *matCellDef="let element; let i = index"
+              [formGroup]="element"
+            >
+              <mat-form-field style="width: 170px">
+                <input
+                  matInput
+                  [matDatepicker]="dp1"
+                  formControlName="birthDate"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="dp1"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #dp1></mat-datepicker>
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <td
+              mat-cell
+              *matCellDef="let element; let i = index"
+              [formGroup]="element"
+            >
+              <button
+                mat-button
+                mat-raised-button
+                [id]="'save' + i"
+                color="primary"
+                [disabled]="processing"
+                (click)="onSave(userForm, i)"
+              >
+                <ng-container *ngIf="processing"
+                  ><mat-icon [id]="'icon' + i"
+                    ><mat-spinner diameter="20"></mat-spinner></mat-icon
+                ></ng-container>
+                Save
+              </button>
+
+              <button
+                type="submit"
+                mat-raised-button
+                color="secondary"
+                (click)="onCancel(userForm, i)"
+              >
+                Cancel
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </ng-container>
+    </form>
+  </div>
+</div>
